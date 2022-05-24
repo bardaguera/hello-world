@@ -1,0 +1,150 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Piaggio Telemetry",
+    "version": "3.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://evdatareporting.apeability.com/api"
+    }
+  ],
+  "paths": {
+    "/telemetry-piaggio": {
+      "post": {
+        "tags": [
+          "event"
+        ],
+        "summary": "Post vehicle event",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "xtoken": []
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Event": {
+        "type": "object",
+        "required": [
+          "vehicle",
+          "data_timestamp",
+          "response_timestamp",
+          "odometer",
+          "latitude",
+          "longitude"
+        ],
+        "properties": {
+          "battery_fault": {
+            "type": "string",
+            "example": "0"
+          },
+          "battery_discharge_current": {
+            "type": "string",
+            "example": "0"
+          },
+          "soc": {
+            "type": "string",
+            "example": "0"
+          },
+          "key_on": {
+            "type": "string",
+            "example": "0"
+          },
+          "battery_charging": {
+            "type": "string",
+            "example": "0"
+          },
+          "controller_temperature": {
+            "type": "string",
+            "example": "0"
+          },
+          "motor_temperature": {
+            "type": "string",
+            "example": "0"
+          },
+          "hand_throttle": {
+            "type": "string",
+            "example": "0"
+          },
+          "drive_mode": {
+            "type": "string",
+            "example": "0"
+          },
+          "battery_over_voltage": {
+            "type": "string",
+            "example": "1"
+          },
+          "odometer": {
+            "type": "string",
+            "example": "0"
+          },
+          "fault_controller_over_temp": {
+            "type": "string",
+            "example": "0"
+          },
+          "fault_controller_under_temp": {
+            "type": "string",
+            "example": "0"
+          },
+          "fault_controller_over_current": {
+            "type": "string",
+            "example": "0"
+          },
+          "data_timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2021-12-30 23:57:44"
+          },
+          "response_timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2021-12-30 23:57:44"
+          },
+          "vehicle": {
+            "type": "string",
+            "example": "MBX0007ZBZH122973"
+          },
+          "latitude": {
+            "type": "string",
+            "example": "12.906531"
+          },
+          "longitude": {
+            "type": "string",
+            "example": "77.575760"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "xtoken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-functions-key"
+      }
+    }
+  }
+}
